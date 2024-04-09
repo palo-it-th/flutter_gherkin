@@ -1,5 +1,5 @@
-import 'package:flutter_driver/flutter_driver.dart';
-import 'package:flutter_gherkin/flutter_gherkin.dart';
+import 'package:flutter_gherkin/src/flutter/world/flutter_world.dart';
+import 'package:flutter_gherkin/src/flutter/adapters/app_driver_adapter.dart';
 import 'package:gherkin/gherkin.dart';
 
 /// Taps a widget of type within another widget.
@@ -7,20 +7,17 @@ import 'package:gherkin/gherkin.dart';
 /// Examples:
 ///
 ///   `Then I tap the element of type "MaterialButton" within the "user_settings_list"`
-StepDefinitionGeneric TapWidgetOfTypeWithinStep() {
+StepDefinitionGeneric tapWidgetOfTypeWithinStep() {
   return when2<String, String, FlutterWorld>(
     RegExp(
         r'I tap the (?:button|element|label|icon|field|text|widget) of type {string} within the {string}$'),
     (widgetType, ancestorKey, context) async {
-      final finder = find.descendant(
-        of: find.byValueKey(ancestorKey),
-        matching: find.byType(widgetType),
+      final finder = context.world.appDriver.findByDescendant(
+        context.world.appDriver.findBy(ancestorKey, FindType.key),
+        context.world.appDriver.findBy(widgetType, FindType.type),
         firstMatchOnly: true,
       );
-      await FlutterDriverUtils.tap(
-        context.world.driver,
-        finder,
-      );
+      await context.world.appDriver.tap(finder);
     },
   );
 }
