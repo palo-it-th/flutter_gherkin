@@ -10,7 +10,7 @@ packages:
     source: hosted
     version: "61.0.0"
   analyzer:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: analyzer
       sha256: ea3d8652bda62982addfd92fdc2d0214e5f82e43325104990d4f4c4a2a313562
@@ -160,10 +160,11 @@ packages:
   gherkin:
     dependency: "direct main"
     description:
-      name: gherkin
-      sha256: c3e0c98b305a94ec8c015038529a1c8c6ea3b0953619514e76647407efb66d7f
-      url: "https://pub.dev"
-    source: hosted
+      path: "."
+      ref: master
+      resolved-ref: fae8d041bdf8e4f30aa913bed3fb7f4aaf0a35e9
+      url: "https://github.com/palo-it-th/dart_gherkin.git"
+    source: git
     version: "3.1.0"
   glob:
     dependency: "direct main"
